@@ -226,3 +226,98 @@ class Enemy:
         screen.blit(imagem, rect.topleft)
         for bullet in self.bullets:
             bullet.draw(screen, camera_x)
+
+#inimigo sala 1
+class InimigoMelee:
+    def __init__(self, x: float, y: float, patrulha_min: float, patrulha_max: float, sprite: pygame.Surface = None):
+        self.x = x
+        self.y = y
+        self.patrulha_min = patrulha_min
+        self.patrulha_max = patrulha_max
+        self.velocidade = 180
+        
+        
+        if sprite is None:
+            self.sprite = pygame.Surface((90, 240)) #Altura
+            self.sprite.fill((255, 0, 0)) 
+        else:
+            self.sprite = sprite
+            
+        self.largura = self.sprite.get_width()
+        self.altura = self.sprite.get_height()
+        
+        self.direcao = 1
+        self.vivo = True
+        self.estado = "patrulhando"
+        
+        self.alcance_visao = 300
+        self.alcance_ataque = 80
+        
+        self.tempo_ataque = 0.0
+        self.cooldown_ataque = 1.0
+        self.hitbox_ataque = None
+        
+        self.ja_causou_dano = False 
+        
+    def update(self, time_delta: float, player_x: float):
+        if not self.vivo:
+            return
+            
+        distancia_x = player_x - self.x
+        
+        if abs(distancia_x) <= self.alcance_ataque:
+            self.estado = "atacando"
+            self.direcao = 1 if distancia_x > 0 else -1
+        elif abs(distancia_x) <= self.alcance_visao:
+            self.estado = "seguindo"
+            self.direcao = 1 if distancia_x > 0 else -1
+        else:
+            self.estado = "patrulhando"
+            
+        if self.estado == "seguindo":
+            self.x += self.velocidade * self.direcao * time_delta
+        elif self.estado == "patrulhando":
+            if self.patrulha_min != self.patrulha_max: 
+                self.x += (self.velocidade * 0.6) * self.direcao * time_delta
+                if self.x > self.patrulha_max:
+                    self.direcao = -1
+                elif self.x < self.patrulha_min:
+                    self.direcao = 1
+            else:
+                self.direcao = 1 if distancia_x > 0 else -1
+                
+       
+        if self.estado == "atacando":
+            self.tempo_ataque += time_delta
+            if self.tempo_ataque >= self.cooldown_ataque:
+                self.tempo_ataque = 0.0
+                self.ja_causou_dano = False 
+                
+                if self.direcao == 1:
+                    self.hitbox_ataque = pygame.Rect(self.x, self.y - self.altura, 80, self.altura)
+                else:
+                    self.hitbox_ataque = pygame.Rect(self.x - 80, self.y - self.altura, 80, self.altura)
+                    
+            elif self.tempo_ataque > 0.4: #tempo "espada"
+                self.hitbox_ataque = None
+        else:
+            self.tempo_ataque = self.cooldown_ataque 
+            self.hitbox_ataque = None
+            
+    def draw(self, screen: pygame.Surface, camera_x: float = 0):
+        if not self.vivo:
+            return
+            
+        imagem = self.sprite
+        if self.direcao == -1: 
+            imagem = pygame.transform.flip(imagem, True, False)
+            
+        pos_tela_x = self.x - camera_x - (self.largura // 2)
+        pos_tela_y = self.y - self.altura
+        
+        screen.blit(imagem, (pos_tela_x, pos_tela_y))
+        
+        if self.hitbox_ataque:
+            ataque_rect_tela = self.hitbox_ataque.copy()
+            ataque_rect_tela.x -= camera_x 
+            pygame.draw.rect(screen, (255, 255, 0), ataque_rect_tela, 3)

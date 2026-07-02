@@ -2,6 +2,7 @@ from __future__ import annotations
 import pygame
 
 from sala_base import SalaBase
+from enemy import InimigoMelee
 
 
 class Sala1(SalaBase):
@@ -20,12 +21,41 @@ class Sala1(SalaBase):
         self.booster_largura = self.sprite_raio.get_width()
         self.booster_altura = self.sprite_raio.get_height()
         self.booster_coletado = False
+        
+        
+        self.inimigos = [
+            #alterar as cordenadas se necessario
+            #Inimigo 1
+            # y muda a altura da base
+            #alterei 1
+            InimigoMelee(x=600, y=600, patrulha_min=400, patrulha_max=800, sprite=None),
+            
+            #Inimigo 2
+            InimigoMelee(x=1700, y=600, patrulha_min=1500, patrulha_max=1900, sprite=None)
+        ]
 
     def update(self, time_delta: float, player, space, volume_sfx: float = 1.0):
         player.update(space, time_delta)
         self.clamp_player(player)
+        
 
-        #colisao
+        
+        player_rect = pygame.Rect(
+            player.body.position.x - 48,
+            player.body.position.y - 160,
+            96,
+            320
+        )
+
+        for inimigo in self.inimigos:
+            inimigo.update(time_delta, player.body.position.x)
+            
+            if inimigo.hitbox_ataque and not inimigo.ja_causou_dano:
+                if player_rect.colliderect(inimigo.hitbox_ataque):
+                    player.levar_dano(1)
+                    inimigo.ja_causou_dano = True 
+
+        
         if not self.booster_coletado:
             booster_rect = pygame.Rect(
                 self.booster_x - self.booster_largura // 2,
@@ -34,14 +64,6 @@ class Sala1(SalaBase):
                 self.booster_altura
             )
             
-            player_rect = pygame.Rect(
-                player.body.position.x - 48,
-                player.body.position.y - 160,
-                96,
-                320
-            )
-            
-            #tempo de duração
             if player_rect.colliderect(booster_rect):
                 self.booster_coletado = True
                 player.booster_ativo = True
@@ -50,12 +72,18 @@ class Sala1(SalaBase):
     def draw(self, screen: pygame.Surface, player, camera_x: int, pos_x: int, pos_y: int, time_delta: float = 0):
         screen.fill((0, 0, 0))
         screen.blit(self.superficie, (-camera_x, 10))
-        
+            
+        player.draw(screen, pos_x, pos_y)
+
+
         if not self.booster_coletado:
             x_tela = (self.booster_x - self.booster_largura // 2) - camera_x
             y_tela = self.booster_y - self.booster_altura // 2
             
             screen.blit(self.sprite_raio, (x_tela, y_tela))
+            
+        for inimigo in self.inimigos:
+            inimigo.draw(screen, camera_x)
 
         player.draw(screen, pos_x, pos_y)
 
