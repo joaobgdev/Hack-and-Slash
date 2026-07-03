@@ -113,13 +113,13 @@ Durante o desenvolvimento do jogo, aplicamos diversos conceitos estudados na dis
 
 **Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?**
 
-O maior desafio foi conciliar o desenvolvimento do jogo com as provas, trabalhos e projetos de outras disciplinas, que aconteceram no mesmo período. Muitas vezes, tivemos pouco tempo para trabalhar no projeto. Para lidar com isso, dividimos as tarefas entre os integrantes, organizamos melhor o que precisava ser feito e aproveitamos o tempo disponível para desenvolver e testar o jogo. Assim, conseguimos concluir o projeto dentro do prazo.
+O maior desafio foi desenvolver o jogo utilizando o Pygame, que possui algumas limitações em relação a uma engine de jogos. Muitas funcionalidades, como o sistema de câmera e diversos elementos do jogo, precisaram ser implementadas manualmente. Além disso, a maior parte dos ajustes só podia ser feita testando o jogo repetidas vezes, já que era necessário executá-lo para verificar a posição dos objetos, colisões e outros detalhes visuais. Para lidar com isso, realizamos testes constantes, corrigimos os problemas conforme apareciam e fomos aperfeiçoando cada funcionalidade aos poucos.
 
 **Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?**
 
-O maior erro durante o projeto foi a dificuldade de organizar o código usando Programação Orientada a Objetos (POO). Como ainda estávamos aprendendo esse modelo de programação, tivemos dúvidas sobre como dividir as responsabilidades das classes e organizar melhor o código. Isso fez com que algumas partes precisassem ser refeitas. Para resolver esse problema, reorganizamos algumas classes, fizemos ajustes no código e buscamos entender melhor os conceitos de POO, deixando o projeto mais organizado e fácil de manter.
+O maior erro durante o projeto foi a dificuldade de organizar o código usando Programação Orientada a Objetos (POO). Como ainda estávamos aprendendo esse modelo de programação, tivemos dificuldades para estruturar as classes e fazer com que todos os arquivos do projeto funcionassem corretamente em conjunto. Para resolver isso, reorganizamos partes do código, fizemos ajustes durante o desenvolvimento e buscamos entender melhor como aplicar os conceitos de POO na prática.
 
 
 **Quais as lições aprendidas durante o projeto?**
 
-A principal lição foi que organização e trabalho em equipe são fundamentais para o sucesso de um projeto. Também aprendemos que planejar melhor a estrutura do código, principalmente usando POO, evita problemas no futuro e facilita a implementação de novas funcionalidades. Além disso, o projeto nos ajudou a melhorar nossos conhecimentos em Python e Pygame e mostrou a importância da comunicação, da divisão de tarefas e do planejamento durante o desenvolvimento.
+Durante o projeto, aprofundamos nossos conhecimentos em Python, principalmente sobre funções, constantes e organização do código. Também aprendemos a utilizar melhor a Programação Orientada a Objetos, entendendo como estruturar classes e fazer com que diferentes arquivos trabalhem juntos em um mesmo sistema. Além dos conhecimentos técnicos, aprendemos que testar o jogo com frequência e manter o código organizado facilita muito o desenvolvimento e a correção de erros.
