@@ -33,3 +33,5 @@ class AudioManager:
         base = VOLUMES_BASE.get(nome, 1.0)
         sfx.set_volume(base * volume_sons * volume_geral)
         sfx.play()
+    def get(self, nome: str):
+        return self._sons.get(nome)

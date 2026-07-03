@@ -4,7 +4,8 @@ import pygame
 from sala_base import SalaBase
 from enemy import InimigoMelee
 
-enemy2 = pygame.image.load("D:\VSCODE\Projeto de IP\sprites\enemy2.png")
+#procura na pasta sprites
+enemy2 = pygame.image.load("sprites/enemy2.png")
 enemy2 = pygame.transform.scale_by(enemy2, 3)
 
 class Sala1(SalaBase):
