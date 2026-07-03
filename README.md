@@ -16,11 +16,38 @@ A protagonista é uma ciborgue assassina de aluguel que possui uma espada equipa
 
 ## Arquitetura do Projeto
 
-(a alterar) O projeto foi desenvolvido utilizando uma arquitetura modular, com separação das responsabilidades em diferentes componentes. A lógica da personagem, dos inimigos e dos projéteis foi organizada em classes próprias, enquanto sistemas como áudio, entrada do usuário e física foram centralizados em gerenciadores específicos.
+📁 Projeto
+│
+├── 📁 fonts                  # Fontes utilizadas na interface
+├── 📁 gui                    # Interface gráfica
+├── 📁 logo                   # Logotipos do jogo
+├── 📁 sounds                 # Efeitos sonoros e músicas
+├── 📁 sprites                # Sprites e imagens dos personagens e objetos
+│
+├── 🎮 Núcleo do jogo
+│   ├── main.py               # Ponto de entrada da aplicação
+│   ├── game.py               # Loop principal e gerenciamento do jogo
+│   └── audio_manager.py      # Controle de reprodução de sons
+│
+├── 👤 Entidades
+│   ├── player.py             # Implementação do jogador
+│   ├── enemy.py              # Implementação dos inimigos
+│   ├── serra.py              # Obstáculo do tipo serra
+│   └── spritesheet.py        # Manipulação de spritesheets
+│
+├── 🗺️ Cenários
+    ├── sala_base.py          # Classe base das salas
+    ├── sala_geral.py         # Sala geral
+    ├── sala1.py              # Primeira sala
+    ├── sala2.py              # Segunda sala
+    ├── sala3.py              # Terceira sala
+    └── fase1.py              # Gerenciamento da primeira fase
 
-As configurações globais do jogo foram concentradas em um único arquivo, facilitando a manutenção e a alteração de parâmetros. Além disso, o projeto utiliza uma estrutura baseada em cenas, permitindo o gerenciamento organizado dos diferentes estados do jogo, como menus e fases.
+
 
 ## Galeria do Projeto
+<img width="1788" height="1000" alt="Screenshot 2026-07-02 220911" src="https://github.com/user-attachments/assets/4afb7d50-dad7-45a6-a3d8-baafd0b89f98" />
+<img width="1784" height="969" alt="Screenshot 2026-07-02 220950" src="https://github.com/user-attachments/assets/0849fb7d-e247-4eae-9723-d85d95f864df" />
 
 ## Ferramentas utilizadas
 
