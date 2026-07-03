@@ -14,11 +14,11 @@ A protagonista é uma ciborgue assassina de aluguel que possui uma espada equipa
 
 ## Instruções
 
-Como executar o jogo
+###Como executar o jogo
 
 Para executar o jogo, é necessário ter o Python instalado no computador (versão 3.13).
 
-Instalação das dependências
+###Instalação das dependências
 
 O jogo utiliza as seguintes bibliotecas:
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 Esse comando instalará automaticamente todas as bibliotecas necessárias para o funcionamento do jogo.
 
-Executando o jogo
+###Executando o jogo
 
 Depois que a instalação das dependências for concluída, execute o arquivo principal do projeto utilizando o Python. Por exemplo:
 
