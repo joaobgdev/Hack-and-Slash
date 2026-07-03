@@ -23,11 +23,17 @@ Para executar o jogo, é necessário ter o Python instalado no computador (vers�
 O jogo utiliza as seguintes bibliotecas:
 
 pygame-ce
+
 pygame-gui
+
 pyscroll
+
 pytmx
+
 pymunk
+
 pyganim
+
 PyTweening
 
 Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
