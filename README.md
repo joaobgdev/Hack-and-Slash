@@ -71,14 +71,22 @@ python main.py
 
 ## Ferramentas utilizadas
 
-* Python: linguagem utilizada no desenvolvimento do projeto.
-* Pygame-ce: responsável pela renderização gráfica, gerenciamento de eventos e execução do jogo.
-* Pymunk: utilizado para implementar a física e o sistema de colisões.
-* Pyganim: empregado no gerenciamento das animações dos personagens.
-* Pyscroll: faz a renderização dos mapas e o sistema de câmera/scrolling.
-* pygame_gui: utilizado na criação da interface gráfica e dos menus.
-* Pytweening: empregado para animações e transições suaves na interface.
-* PyTMX: serve para ler mapas criados no editor Tiled (.tmx) e usá-los no jogo.
+**Bibliotecas utilizadas:**
+* Pygame: Biblioteca que permite criação de jogos e interfaces visuais através do Python.
+* Pymunk: Responsável pela física e sistema de colisões.
+* Pygame_gui: Usado para implementação de botões e interfaces interativas.
+* Pytweening: Usado para criar animações fluidas através de funções matemáticas.
+* Colorsys: Usado para gerenciamento de cores e filtros.
+* Random: Usado para criar eventos e efeitos randômicos durante a gameplay.
+* Math: Usado para gerenciar funções matemáticas de maneira simples (Usado somente no inimigo)
+* Sys: Ajusta o funcionamento do jogo quando rodado em exe para evitar bugs.
+* Pathlib: Facilita o acesso a pastas para receber sprites, sons e etc sem muita repetição de textos longos.
+* Enum: Foi usado para guardar o estado atual do jogo (Salas, Menus) como um GameState enumerável e permitir fácil troca de GameStates.
+
+**Ferramentas:**
+* Krita: Foi usado para desenhar todos os sprites originais do jogo.
+* Navegador: (Não sei se precisa mencionar isso) Foram feitas pesquisas e vimos tutoriais para compreender a programação do pygame e de POO.
+* Sites de Assets, Músicas e SFX: Alguns dos Sound Effects foram criados com IA (Dash), outros foram instalados de sites como Pixabay e Audiio, as músicas do jogo também foram baixadas do Pixabay, a maioria dos Assets de pixel art não autorais foram baixados do itch.io
 
 ## Membros da equipe e suas funções
 
