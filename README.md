@@ -33,17 +33,17 @@ PyTweening
 Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
 
 Após clonar ou baixar o projeto, abra um terminal na pasta do projeto e execute o seguinte comando:
-
+```bash
 pip install -r requirements.txt
-
+```
 Esse comando instalará automaticamente todas as bibliotecas necessárias para o funcionamento do jogo.
 
 ### Executando o jogo
 
-Depois que a instalação das dependências for concluída, execute o arquivo principal do projeto utilizando o Python. Por exemplo:
-
+Depois que a instalação das dependências for concluída, execute o arquivo principal do projeto utilizando o Python.
+```bash
 python main.py
-
+```
 ## 📁 Arquitetura do Projeto
 
 ```
