@@ -38,9 +38,9 @@ python main.py
 
 ```
 │
-├── 📁 fonts                  # Fontes utilizadas na interface
+├── 📁 fonts                  # Fonte utilizada na interface
 ├── 📁 gui                    # Interface gráfica
-├── 📁 logo                   # Logotipos do jogo
+├── 📁 logo                   # Logotipo do jogo
 ├── 📁 sounds                 # Efeitos sonoros e músicas
 ├── 📁 sprites                # Sprites e imagens dos personagens e objetos
 │
@@ -48,20 +48,21 @@ python main.py
 │   ├── main.py               # Ponto de entrada da aplicação
 │   ├── game.py               # Loop principal e gerenciamento do jogo
 │   └── audio_manager.py      # Controle de reprodução de sons
+    └── spritesheet.py        # Manipulação de spritesheets
 │
 ├── 👤 Entidades
 │   ├── player.py             # Implementação do jogador
 │   ├── enemy.py              # Implementação dos inimigos
-│   ├── serra.py              # Obstáculo do tipo serra
-│   └── spritesheet.py        # Manipulação de spritesheets
+│   └── serra.py              # Obstáculo do tipo serra
+│   
 │
-├── 🗺️ Cenários
-    ├── sala_base.py          # Classe base das salas
+└── 🗺️ Cenários
+    ├── fase1.py              # Sala do tutorial
     ├── sala_geral.py         # Sala geral
     ├── sala1.py              # Primeira sala
     ├── sala2.py              # Segunda sala
-    ├── sala3.py              # Terceira sala
-    └── fase1.py              # Gerenciamento da primeira fase
+    └── sala3.py              # Terceira sala
+
 ```
 
 
