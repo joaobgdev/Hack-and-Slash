@@ -1,13 +1,10 @@
 from __future__ import annotations
 import pygame
-
 from sala_base import SalaBase
 from enemy import Enemy
 
-
 class Sala2(SalaBase):
     #sala do olho
-
     CLAMP_MIN_X = 190
 
     def __init__(self, superficie: pygame.Surface, enemy_sprite: pygame.Surface, bullet_sprite: pygame.Surface | None = None):
@@ -27,7 +24,6 @@ class Sala2(SalaBase):
 
     def update(self, time_delta: float, player, space, shoot_sfx=None, volume_sfx: float = 1.0):
         player.update(space, time_delta)
-
         self.inimigo.update(
             time_delta,
             player.body.position.x,
@@ -37,7 +33,6 @@ class Sala2(SalaBase):
         )
 
         self.checar_ataque_player(player, self.inimigo)
-        
         self.clamp_player(player)
 
     def draw(self, screen: pygame.Surface, player, camera_x: int, pos_x: int, pos_y: int, time_delta: float = 0):
@@ -68,7 +63,6 @@ class Sala2(SalaBase):
             screen.blit(sprite_vida, (x, y))
 
     def checar_coleta_vida(self, player):
-
         if self.pegou_vida:
             return False
         player_rect = pygame.Rect(player.body.position.x - 45, player.body.position.y - 120, 90, 200)
@@ -76,7 +70,6 @@ class Sala2(SalaBase):
         if player_rect.colliderect(vida_rect):
             self.pegou_vida = True
             return True
-
         return False
 
     def reset(self):

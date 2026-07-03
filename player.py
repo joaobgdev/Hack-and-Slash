@@ -2,7 +2,7 @@ from __future__ import annotations
 import pygame
 import pymunk
 import pytweening
-
+from audio_manager import AudioManager
 
 class Player:
     # Velocidades de movimento
@@ -14,13 +14,16 @@ class Player:
     DASH_DISTANCE: int   = 200
     DASH_DURATION: float = 0.15
 
+    # Ataque
+    ATTACK_ANIM_DURATION: float = 0.35
+
     # Animação
     IDLE_FRAMES:           int = 7
     IDLE_COOLDOWN_MAX:     int = 10
     WALKING_FRAMES:        int = 2
     WALKING_COOLDOWN_MAX:  int = 20
 
-    def __init__(self, space: pymunk.Space, animations: dict[str, list[pygame.Surface]], pos: tuple[float, float] = (250, 430)):
+    def __init__(self, space: pymunk.Space, audio: AudioManager, animations: dict[str, list[pygame.Surface]], pos: tuple[float, float] = (250, 430)):
 
         # Física
         self.body  = pymunk.Body(1, float("inf"))
@@ -44,9 +47,13 @@ class Player:
         self.image  = self.animations["Idle"][0]
         self.atacando = False
         self.tempo_ataque = 0
-        self.duracao_ataque = 0.2
+        self.duracao_ataque = self.ATTACK_ANIM_DURATION
         self.acertou_ataque = False
-        
+
+        # Animação do ataque (spritesheet sword_slash)
+        self.slash_frames = self.animations.get("Attack", [])
+        self.frame_ataque = 0
+
         self.hitbox_ataque = None
 
         # Dash
@@ -61,6 +68,7 @@ class Player:
         # Teleporte
         self.has_tp = False
         self.tp_pos: tuple[float, float] = (0.0, 0.0)
+        self.audio = audio
 
         # Efeito visual (fase 1)
         self.shadow_opacity = 0
@@ -92,12 +100,17 @@ class Player:
         if self.atacando:
             largura = self.hitbox_ataque.width
             if self.virado:
-                 self.hitbox_ataque.x = self.body.position.x + 40
+                 self.hitbox_ataque.x = self.body.position.x + 30
             else:
-                 self.hitbox_ataque.x = self.body.position.x - largura - 40
-            self.hitbox_ataque.y = self.body.position.y - 120
+                 self.hitbox_ataque.x = self.body.position.x - largura - 30
+            self.hitbox_ataque.y = self.body.position.y - 140
             
             self.tempo_ataque -= time_delta
+
+            if self.slash_frames:
+                progresso = 1 - (self.tempo_ataque / self.duracao_ataque)
+                progresso = max(0.0, min(1.0, progresso))
+                self.frame_ataque = min(int(progresso * len(self.slash_frames)), len(self.slash_frames) - 1)
 
             if self.tempo_ataque <= 0:
                 self.atacando = False
@@ -139,13 +152,15 @@ class Player:
         offset = self.dash_distance if self.virado else -self.dash_distance
         self.dash_final = self.body.position.x + offset
 
-    def usar_teleporte(self):
+    def usar_teleporte(self, volume_sons, volume_geral):
         if not self.has_tp:
             self.tp_pos = (self.body.position.x, self.body.position.y)
             self.has_tp = True
+            self.audio.tocar("tpset", volume_sons, volume_geral * 0.17)
         else:
             self.body.position = self.tp_pos
             self.has_tp = False
+            self.audio.tocar("tpuse", volume_sons, volume_geral * 0.17)
     
     def atacar(self):
         
@@ -154,17 +169,18 @@ class Player:
         
         self.atacando = True
         self.tempo_ataque = self.duracao_ataque
-        
-        largura = 80
-        altura = 120
+        self.frame_ataque = 0
+
+        largura = 140
+        altura = 180
         
         if self.virado:
-            x = self.body.position.x + 40
+            x = self.body.position.x + 30
         
         else:
-            x = self.body.position.x - largura - 40
+            x = self.body.position.x - largura - 30
 
-        y = self.body.position.y - 120
+        y = self.body.position.y - 140
 
         self.hitbox_ataque = pygame.Rect(x, y, largura, altura)
 
@@ -219,18 +235,18 @@ class Player:
 
         screen.blit(imagem, (pos_x, pos_y))
 
-        if self.hitbox_ataque:
-            largura = self.hitbox_ataque.width
-            altura = self.hitbox_ataque.height
-            
+        if self.atacando and self.slash_frames:
+            slash_img = self.slash_frames[self.frame_ataque]
+            if not self.virado:
+                slash_img = pygame.transform.flip(slash_img, True, False)
+
             if self.virado:
-                x = pos_x + 120
+                slash_x = pos_x + 80
             else:
-                x = pos_x - largura + 20
+                slash_x = pos_x - slash_img.get_width() + 80
+            slash_y = pos_y
 
-            y = pos_y + 110
-
-            pygame.draw.rect(screen, "red", (x, y, largura, altura), 2)
+            screen.blit(slash_img, (slash_x, slash_y))
 
         if efeitos_fase1:
             self._desenhar_efeitos_fase1(screen, imagem, pos_x, pos_y)

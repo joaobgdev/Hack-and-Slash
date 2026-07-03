@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 import pygame
 import math
 
-
 class SalaBase(ABC):
 
     #resolução fixa do jogo

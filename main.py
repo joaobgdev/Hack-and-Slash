@@ -101,6 +101,7 @@ class GameState(Enum):
     OPTIONS = 2
     EXIT = 3
     JOGANDO = 4
+    CREDITS = 5
 #endregion
 
 #region Sprites/Sounds/GUI
@@ -109,6 +110,7 @@ class GameState(Enum):
 
 #raio
 raio_sprite = pygame.image.load(SPRITES / "raio.png").convert_alpha()
+raio_sprite = pygame.transform.scale_by(raio_sprite, 3)
 
 #chave
 chave_sprite = pygame.image.load(SPRITES / "chave.png").convert_alpha()
@@ -156,6 +158,19 @@ player_walking_animation_list = []
 player_walking_animation_list = player_walking_sprite.get_animation(0, 2, 64, 128, 2.73, (50, 50, 50))
 player_walking_animation_list_saturada = [saturar(frame, 1.5) for frame in player_walking_animation_list]
 
+    #Attack (Sword Slash)
+sword_slash_sheet  = pygame.image.load(SPRITES / "sword_slash.png").convert_alpha()
+sword_slash_sprite = spritesheet.Spritesheet(sword_slash_sheet)
+
+slash_frame_largura = sword_slash_sheet.get_width()  // 5
+slash_frame_altura  = sword_slash_sheet.get_height() // 2
+
+slash_animation_list = []
+for _linha in range(2):
+    slash_animation_list += sword_slash_sprite.get_animation(
+        _linha, 5, slash_frame_largura, slash_frame_altura, 4, (50, 50, 50)
+    )
+
 #Shadow Opacity set
 
 #Sprites Falas Tutorial
@@ -193,6 +208,9 @@ open_door_sfx = pygame.mixer.Sound(SFX / "open_door.mp3")
 dash_sfx1 = pygame.mixer.Sound(SFX / "dash3.mp3")
 dash_sfx2 = pygame.mixer.Sound(SFX / "dash.mp3")
 heal_sfx = pygame.mixer.Sound(SFX / "hpup.mp3")
+speed_sfx = pygame.mixer.Sound(SFX / "speedup.mp3")
+tpset = pygame.mixer.Sound(SFX / "teleport_set.mp3")
+tpuse = pygame.mixer.Sound(SFX / "teleport_use.mp3")
 #endregion
 
 #endregion
@@ -309,7 +327,8 @@ pygame.mixer.music.play(-1)
 #region Player
 animations = {
     "Idle": player_idle_animation_list_saturada,
-    "Walking": player_walking_animation_list_saturada
+    "Walking": player_walking_animation_list_saturada,
+    "Attack": slash_animation_list
 }
 
 was_in_game = False
@@ -344,6 +363,12 @@ yes_text = font.render("Sim", True, "White")
 no_text = font.render("Nao", True, "White")
 exit_game_text = font.render("Sair do jogo?", True, "White")
 
+#créditos
+joaob = font.render("Joao Bernardo: Arte, Programacao e Ideacao", True, "White")
+kamilla = font.render("Kamilla Menezes: Programacao e Documentacao", True, "White")
+lucas = font.render("Lucas Medrado: Programacao", True, "White")
+sofia = font.render("Sofia Sobreiro: Programacao", True, "White")
+
 fase1_sprites = {
     "slash_neutro":   slash_neutro,
     "slash_side_eye": slash_side_eye,
@@ -372,7 +397,10 @@ game_sons = {
     "click":     click_sfx,
     "dash1":     dash_sfx1,
     "dash2":     dash_sfx2,
-    "heal":      heal_sfx
+    "heal":      heal_sfx,
+    "speed":     speed_sfx,
+    "tpset":     tpset,
+    "tpuse":     tpuse
 }
 
 fonte_contador = pygame.font.Font(FONTS / "PIXY.ttf", 40)
@@ -382,6 +410,7 @@ life_bar_sprites = {
     "life_bar_1": life_bar_1_3,
 }
 game_over_sprite = pygame.image.load(SPRITES / "game over.png").convert_alpha()
+game_over_music = MUSICS / "game_over.mp3"
 
 game = Game(
     animations,
@@ -396,6 +425,7 @@ game = Game(
     life_bar_sprites,
     game_over_sprite,
     raio_sprite,
+    game_over_music,
 )
 #endregion
 
@@ -424,6 +454,8 @@ while run_game:
                     transicao_opacity = 255
                 elif event.ui_element == exit_button:
                     game_state = GameState.EXIT
+                elif event.ui_element == credits_button:
+                    game_state = GameState.CREDITS
                 elif event.ui_element == options_button:
                     game_state = GameState.OPTIONS
             elif game_state == GameState.OPTIONS:
@@ -432,6 +464,9 @@ while run_game:
                 elif event.ui_element == back_button and was_in_game:
                     game_state = sala_anterior_options
                     game.pausado = False
+            elif game_state == GameState.CREDITS:
+                if event.ui_element == back_button:
+                    game_state = GameState.MENU
             elif game_state == GameState.EXIT:
                 if event.ui_element == yes_button:
                     run_game = False
@@ -485,6 +520,8 @@ while run_game:
         elif game_state == GameState.JOGANDO:
             if event.type == pygame.KEYDOWN:
                 game.handle_keydown(event, Volume_Sons, Volume_Geral)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                game.handle_mouse_click(event, Volume_Sons, Volume_Geral)
 
         manager.process_events(event)
     #endregion
@@ -599,7 +636,20 @@ while run_game:
         screen.blit(yes_text, ((yes_x + medium_button_width // 2) - yes_text.get_width() // 2 - 1, yes_no_button_y + 13))
         screen.blit(no_text, ((no_x - medium_button_width // 2) - no_text.get_width() // 2 + 3, yes_no_button_y + 13))
         #endregion
+    elif game_state == GameState.CREDITS:
+        
+        transicao_opacity = 0
+        screen.fill(BG)
+        back_button.show()
+        screen.blit(predios, (0, 0))
+        screen.blit(square_ui, ((screen.get_width() // 2) - (square_ui.get_width() // 2), 100))
+        screen.blit(joaob, ((screen.get_width() // 2) - (joaob.get_width() // 2), 125))
+        screen.blit(kamilla, ((screen.get_width() // 2) - (joaob.get_width() // 2), 185))
+        screen.blit(lucas, ((screen.get_width() // 2) - (joaob.get_width() // 2), 245))
+        screen.blit(sofia, ((screen.get_width() // 2) - (joaob.get_width() // 2), 305))
 
+        screen.blit(large_button_ui, ((LARGURA - large_button_width) // 2, 525))
+        screen.blit(back_text, ((LARGURA // 2) - (back_text.get_width() // 2), 538))
     elif game_state == GameState.JOGANDO:
         
         #region show/hide
@@ -627,7 +677,7 @@ while run_game:
         if game.state == RoomState.SALAGERAL:
             pygame.mixer.music.set_volume(0.125 * Volume_Musicas * Volume_Geral)
 
-        game.draw(screen, 0.15 * Volume_Sons * Volume_Geral)
+        game.draw(screen, 0.15 * Volume_Sons * Volume_Geral, 0.125 * Volume_Musicas * Volume_Geral)
 
         if game.pausado:
             screen.blit(black_overlay, (0, 0))

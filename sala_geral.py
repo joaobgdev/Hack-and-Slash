@@ -1,6 +1,5 @@
 from __future__ import annotations
 import pygame
-
 from sala_base import SalaBase
 
 def _criar_textos_sala_geral(font: pygame.font.Font):

@@ -48,12 +48,14 @@ class Game:
         life_bar_sprites: dict,
         game_over_sprite: pygame.Surface,
         raio_sprite: pygame.Surface,
+        game_over_music=None,
     ):
         self.E_gui = E_gui
         self.font = font
         self.fonte_contador = fonte_contador
         self.life_bar_sprites = life_bar_sprites
         self.game_over_sprite = game_over_sprite
+        self.game_over_music = game_over_music
         self.audio = AudioManager(sons)
 
         #Física
@@ -62,7 +64,7 @@ class Game:
         self.space.damping = 0.9
 
         #Player
-        self.player = Player(self.space, animations, pos=SPAWN_FASE1)
+        self.player = Player(self.space, self.audio, animations, pos=SPAWN_FASE1)
 
         #Chãos
         self._chao_fase1      = self._criar_chao((0, 595), 1280)
@@ -99,6 +101,7 @@ class Game:
 
         self.timer_morte = 300
         self.game_over = False
+        self._tocou_musica_game_over = False
 
     @staticmethod
     def _criar_chao(pos: tuple, largura: int):
@@ -125,7 +128,7 @@ class Game:
             self.player.pular()
 
         elif k == pygame.K_x:
-            self.player.usar_teleporte()
+            self.player.usar_teleporte(volume_sons, volume_geral)
 
         elif k == pygame.K_k:
             self.player.life -= 1
@@ -145,8 +148,10 @@ class Game:
 
         elif k == pygame.K_e:
             self._handle_tecla_e(volume_sons, volume_geral)
-        
-        elif k == pygame.K_j:
+
+    def handle_mouse_click(self, event: pygame.event.Event, volume_sons: float = 1.0, volume_geral: float = 1.0):
+        #ataque com o botao esquerdo do mouse
+        if event.button == 1 and not self.pausado:
             self.player.atacar()
 
     def _handle_tecla_e(self, volume_sons: float, volume_geral: float):
@@ -360,15 +365,14 @@ class Game:
             self._trocar_chao(self._chao_sala1)
             self.transicao_opacity = 255
 
-        volume_sfx = 0.40 * volume_sons * volume_geral
-        self.sala1.update(time_delta, self.player, self.space, volume_sfx)
+        damage_sfx = self.audio.get("damage")
+        vol_damage = 0.80 * volume_sons * volume_geral
+        speed_sfx  = self.audio.get("speed")
+        self.sala1.update(time_delta, self.player, self.space, vol_damage, damage_sfx, speed_sfx)
 
         camera_x     = self.sala1.calcular_camera(self.player.body.position.x)
         pos_x, pos_y = self.sala1.calcular_pos_player(self.player.body.position.x, self.player.body.position.y, camera_x)
         player_hitbox = pygame.Rect(pos_x + 50, pos_y + 60, 70, 200)
-
-        damage_sfx  = self.audio.get("damage")
-        vol_damage  = 0.80 * volume_sons * volume_geral
 
         self.player.atualizar_animacao()
         self._mover(keys)
@@ -390,7 +394,7 @@ class Game:
             screen.blit(sp["life_bar_1"], (20, 20))
 
     def draw(self, screen: pygame.Surface,
-             click_sfx_volume: float = 1.0):
+             click_sfx_volume: float = 1.0, music_volume: float = 1.0):
         if self.state == GameState.FASE1:
             self.fase1.draw(screen, self.player)
             self.pos_x = int(self.player.body.position.x - 110)
@@ -433,6 +437,17 @@ class Game:
             x = screen.get_width() // 2 - imagem.get_width() // 2
             y = screen.get_height() // 2 - imagem.get_height() // 2
             screen.blit(imagem, (x, y))
+            if self.transicao_opacity > 0:
+                self.transicao_opacity -= 5
+
+            if not self._tocou_musica_game_over and self.game_over_music:
+                self.transicao_opacity = 255
+                self._tocou_musica_game_over = True
+                pygame.mixer.music.load(self.game_over_music)
+                pygame.mixer.music.set_volume(music_volume)
+                pygame.mixer.music.play(-1)
+            elif self._tocou_musica_game_over:
+                pygame.mixer.music.set_volume(music_volume)
 
             self.timer_morte -= 1
 
@@ -472,5 +487,6 @@ class Game:
         self.transicao_opacity       = 255
 
         self.game_over = False
+        self._tocou_musica_game_over = False
         self.timer_morte = 300
         self.descobriu_porta_chefe = False

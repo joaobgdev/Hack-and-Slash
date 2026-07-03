@@ -1,38 +1,29 @@
 from __future__ import annotations
 import random
 import pygame
-
 from sala_base import SalaBase
 from serra import SerraVertical, SerraHorizontal
 
-
 class Sala3(SalaBase):
     #sala das serras
-
     CLAMP_MIN_X = 190
-
-    _ESPACAMENTO_SERRA = 350
-    _INICIO_SERRAS     = 600
-    _SOBRA             = 500
 
     def __init__(self, superficie: pygame.Surface, sprite_serra: pygame.Surface):
         super().__init__(superficie)
         self.CLAMP_MAX_X = self.largura - 70
         self.sprite_serra = sprite_serra
         self.rotacao      = 0
-
         self.serras = self._criar_serras_verticais()
-        self.serra_horizontal = SerraHorizontal(
-            x_min=1100, x_max=1900, y=540, vel=280)
+        self.serra_horizontal = SerraHorizontal(x_min=1100, x_max=1900, y=540, vel=280)
 
     def _criar_serras_verticais(self):
-        velocidades = [0.45, 0.55, 0.40, 0.50, 0.60, 0.35]
-        fases       = [0.00, 0.30, 0.60, 0.15, 0.45, 0.75]
-        limite  = self.largura - self._SOBRA
-        x_atual = self._INICIO_SERRAS
+        velocidades = [0.45, 0.55, 0.40, 0.50, 0.60, 0.35] #velocidades das serras
+        fases       = [0.00, 0.30, 0.60, 0.15, 0.45, 0.75] #descincroniza as serras inicialmente
+        limite  = self.largura - 500
+        x_atual = 600
         serras  = []
         i = 0
-        while x_atual < limite:
+        while x_atual < limite: #gerar serras
             serras.append(SerraVertical(
                 x      = x_atual,
                 y_topo = random.randint(80, 150),
@@ -40,7 +31,7 @@ class Sala3(SalaBase):
                 vel    = velocidades[i % len(velocidades)],
                 fase   = fases[i % len(fases)],
             ))
-            x_atual += self._ESPACAMENTO_SERRA
+            x_atual += 350
             i += 1
         return serras
 
@@ -57,7 +48,6 @@ class Sala3(SalaBase):
     def draw(self, screen: pygame.Surface, player, camera_x: int, pos_x: int, pos_y: int, time_delta: float = 0):
         screen.fill((0, 0, 0))
         screen.blit(self.superficie, (-camera_x, 10))
-
         sprite_rot = pygame.transform.rotate(self.sprite_serra, self.rotacao)
         for serra in self.serras:
             serra.draw(screen, sprite_rot, camera_x)
@@ -76,5 +66,4 @@ class Sala3(SalaBase):
             self.serra_horizontal.get_hitbox(camera_x))
 
     def checar_saida(self, player_x: float, screen: pygame.Surface, E_gui: pygame.Surface):
-        
         super().checar_saida(player_x, screen, E_gui)

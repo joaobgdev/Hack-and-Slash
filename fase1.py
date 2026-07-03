@@ -1,7 +1,6 @@
 from __future__ import annotations
 import random
 import pygame
-
 from sala_base import SalaBase
 
 _FALAS = [
@@ -20,7 +19,7 @@ _FALAS = [
     ("slash_neutro",   "slash", ["Tutorial_Fala12"]),
 ]
 
-ENTER_FALAS = {0, 1, 2, 5, 11}
+ENTER_FALAS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
 
 def _criar_textos_tutorial(font: pygame.font.Font):
     slash_name = font.render("Slash", False, (235, 52, 116))

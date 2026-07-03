@@ -2,18 +2,12 @@ from __future__ import annotations
 import pygame
 import pytweening
 
+#serras da sala 3
 
 class SerraBase:
     #serras compartilhando o comportamento
 
-    TAMANHO_HITBOX: int = 150
-
-    def get_hitbox(self, camera_x: float = 0):
-        raise NotImplementedError
-
-    def draw(self, screen: pygame.Surface, sprite_rotacionado: pygame.Surface, camera_x: float):
-        raise NotImplementedError
-
+    #centraliza os comportamentos da serra pra nao bugar quando ela girar
     def _blit_centrado(self, screen: pygame.Surface, sprite: pygame.Surface, world_x: float, world_y: float, camera_x: float):
         screen_x = world_x - camera_x
         rect = sprite.get_rect(center=(screen_x, world_y))
@@ -27,9 +21,7 @@ class SerraBase:
 
 class SerraVertical(SerraBase):
     #vertical
-
     TAMANHO_HITBOX = 150
-
     def __init__(self, x: float, y_topo: float, y_base: float, vel: float, fase: float):
         self.x      = x
         self.y_topo = y_topo
@@ -41,7 +33,7 @@ class SerraVertical(SerraBase):
     def update(self, time_delta: float):
         self.t += time_delta * self.vel
         ciclo = self.t % 2.0
-        progresso = (pytweening.easeInOutSine(ciclo)
+        progresso = (pytweening.easeInOutSine(ciclo) #pytweening pra fazer o movimento das serras ficar mais fluido
                      if ciclo <= 1.0
                      else pytweening.easeInOutSine(2.0 - ciclo))
         self.y = self.y_topo + (self.y_base - self.y_topo) * progresso
@@ -55,8 +47,7 @@ class SerraVertical(SerraBase):
 
 class SerraHorizontal(SerraBase):
     #horizontal
-    TAMANHO_HITBOX = 175
-
+    TAMANHO_HITBOX = 175 #Hit
     def __init__(self, x_min: float, x_max: float, y: float, vel: float = 280):
         self.x_min   = x_min
         self.x_max   = x_max
