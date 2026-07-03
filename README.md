@@ -14,9 +14,9 @@ A protagonista é uma ciborgue assassina de aluguel que possui uma espada equipa
 
 ## Instruções
 
-## Arquitetura do Projeto
+## 📁 Arquitetura do Projeto
 
-📁 Projeto
+```
 │
 ├── 📁 fonts                  # Fontes utilizadas na interface
 ├── 📁 gui                    # Interface gráfica
@@ -42,7 +42,7 @@ A protagonista é uma ciborgue assassina de aluguel que possui uma espada equipa
     ├── sala2.py              # Segunda sala
     ├── sala3.py              # Terceira sala
     └── fase1.py              # Gerenciamento da primeira fase
-
+```
 
 
 ## Galeria do Projeto
