@@ -38,6 +38,7 @@ PyTweening
 
 Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
 
+
 Após clonar ou baixar o projeto, abra um terminal na pasta do projeto e execute o seguinte comando:
 ```bash
 pip install -r requirements.txt
