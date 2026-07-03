@@ -70,7 +70,7 @@ python main.py
 <img width="1788" height="1000" alt="Screenshot 2026-07-02 220911" src="https://github.com/user-attachments/assets/4afb7d50-dad7-45a6-a3d8-baafd0b89f98" />
 <img width="1784" height="969" alt="Screenshot 2026-07-02 220950" src="https://github.com/user-attachments/assets/0849fb7d-e247-4eae-9723-d85d95f864df" />
 
-## Ferramentas utilizadas
+## Bibliotecas e Ferramentas utilizadas
 
 **Bibliotecas utilizadas:**
 * Pygame: Biblioteca que permite criação de jogos e interfaces visuais através do Python.
@@ -86,7 +86,6 @@ python main.py
 
 **Ferramentas:**
 * Krita: Foi usado para desenhar todos os sprites originais do jogo.
-* Navegador: (Não sei se precisa mencionar isso) Foram feitas pesquisas e vimos tutoriais para compreender a programação do pygame e de POO.
 * Sites de Assets, Músicas e SFX: Alguns dos Sound Effects foram criados com IA (Dash), outros foram instalados de sites como Pixabay e Audiio, as músicas do jogo também foram baixadas do Pixabay, a maioria dos Assets de pixel art não autorais foram baixados do itch.io
 
 ## Membros da equipe e suas funções
