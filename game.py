@@ -152,7 +152,7 @@ class Game:
     def handle_mouse_click(self, event: pygame.event.Event, volume_sons: float = 1.0, volume_geral: float = 1.0):
         #ataque com o botao esquerdo do mouse
         if event.button == 1 and not self.pausado:
-            self.player.atacar()
+            self.player.atacar(volume_sons, volume_geral)
 
     def _handle_tecla_e(self, volume_sons: float, volume_geral: float):
         s = self.state

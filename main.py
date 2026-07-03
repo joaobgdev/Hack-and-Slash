@@ -211,6 +211,7 @@ heal_sfx = pygame.mixer.Sound(SFX / "hpup.mp3")
 speed_sfx = pygame.mixer.Sound(SFX / "speedup.mp3")
 tpset = pygame.mixer.Sound(SFX / "teleport_set.mp3")
 tpuse = pygame.mixer.Sound(SFX / "teleport_use.mp3")
+sword_slash = pygame.mixer.Sound(SFX / "sword.mp3")
 #endregion
 
 #endregion
@@ -400,7 +401,8 @@ game_sons = {
     "heal":      heal_sfx,
     "speed":     speed_sfx,
     "tpset":     tpset,
-    "tpuse":     tpuse
+    "tpuse":     tpuse,
+    "sword":     sword_slash
 }
 
 fonte_contador = pygame.font.Font(FONTS / "PIXY.ttf", 40)
@@ -637,7 +639,7 @@ while run_game:
         screen.blit(no_text, ((no_x - medium_button_width // 2) - no_text.get_width() // 2 + 3, yes_no_button_y + 13))
         #endregion
     elif game_state == GameState.CREDITS:
-        
+
         transicao_opacity = 0
         screen.fill(BG)
         back_button.show()

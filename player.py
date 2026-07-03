@@ -117,7 +117,6 @@ class Player:
                 self.hitbox_ataque = None
 
     def _atualizar_estado(self):
-        
         vx, vy = self.body.velocity
         if vx == 0 and vy == 0:
             self.estado = "Idle"
@@ -125,7 +124,6 @@ class Player:
             self.estado = "Walking"
 
     def _processar_dash(self, time_delta: float):
-        
         progresso = pytweening.easeOutQuart(self.dash_t)
         new_x = (self.dash_inicial
                  + (self.dash_final - self.dash_inicial) * progresso)
@@ -162,8 +160,8 @@ class Player:
             self.has_tp = False
             self.audio.tocar("tpuse", volume_sons, volume_geral * 0.17)
     
-    def atacar(self):
-        
+    def atacar(self, volume_sons, volume_geral):
+        self.audio.tocar("sword", volume_sons, volume_geral * 0.25)
         if self.atacando:
             return
         
