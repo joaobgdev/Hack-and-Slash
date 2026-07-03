@@ -82,21 +82,14 @@ python main.py
 
 ## Membros da equipe e suas funções
 
-* [João Bernardo - jbgac](https://github.com/kinobruh)
+* [João Bernardo - jbgac](https://github.com/kinobruh) - Foi responsável pela criação de toda a parte visual do jogo, produzindo os sprites, cenários e demais elementos gráficos. Também participou ativamente da programação, implementando diversas funcionalidades do projeto.
 
-Foi responsável pela criação de toda a parte visual do jogo, produzindo os sprites, cenários e demais elementos gráficos. Também participou ativamente da programação, implementando diversas funcionalidades do projeto.
+* [Kamilla Menezes - krms](https://github.com/kamillaarm) - Auxiliou na programação do projeto, colaborando na implementação e nos testes das funcionalidades. Também foi responsável pela elaboração do README e pela preparação dos slides da apresentação.
 
-* [Kamilla Menezes - krms](https://github.com/kamillaarm)
+* [Lucas Medrado - lms16](https://github.com/lucmedrado) - Atuou principalmente na programação do jogo, desenvolvendo grande parte das mecânicas, corrigindo erros e contribuindo para a organização do código.
 
-Auxiliou na programação do projeto, colaborando na implementação e nos testes das funcionalidades. Também foi responsável pela elaboração do README e pela preparação dos slides da apresentação.
+* [Sofia Sobreira - ssm](https://github.com/sofiisobreira) - Auxiliou na programação, contribuindo para o desenvolvimento e a integração das funcionalidades. Além disso, participou da elaboração do README e da criação dos slides utilizados na apresentação do projeto.
 
-* [Lucas Medrado - lms16](https://github.com/lucmedrado)
-
-Atuou principalmente na programação do jogo, desenvolvendo grande parte das mecânicas, corrigindo erros e contribuindo para a organização do código.
-
-* [Sofia Sobreira - ssm](https://github.com/sofiisobreira)
-
-Auxiliou na programação, contribuindo para o desenvolvimento e a integração das funcionalidades. Além disso, participou da elaboração do README e da criação dos slides utilizados na apresentação do projeto.
 ## Conceitos utilizados
 
 Durante o desenvolvimento do jogo, aplicamos diversos conceitos estudados na disciplina de Introdução à Programação, utilizando-os para implementar as principais mecânicas e organizar o código do projeto.
