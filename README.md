@@ -22,22 +22,15 @@ Para executar o jogo, é necessário ter o Python instalado no computador (vers�
 
 O jogo utiliza as seguintes bibliotecas:
 
-pygame-ce
-
-pygame-gui
-
-pyscroll
-
-pytmx
-
-pymunk
-
-pyganim
-
-PyTweening
+* pygame-ce
+* pygame-gui
+* pyscroll
+* pytmx
+* pymunk
+* pyganim
+* PyTweening
 
 Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
-
 
 Após clonar ou baixar o projeto, abra um terminal na pasta do projeto e execute o seguinte comando:
 ```bash
@@ -105,5 +98,15 @@ python main.py
 * [Sofia Sobreira - ssm](https://github.com/sofiisobreira)
 
 ## Conceitos utilizados
+
+Durante o desenvolvimento do jogo, aplicamos diversos conceitos estudados na disciplina de Introdução à Programação, utilizando-os para implementar as principais mecânicas e organizar o código do projeto.
+
+**Programação Orientada a Objetos (POO):** Utilizamos classes para representar e organizar os principais elementos do jogo, como a classe `Game`, responsável por controlar o funcionamento geral da aplicação. A POO permitiu dividir as responsabilidades do projeto, tornando o código mais organizado, modular e de fácil manutenção.
+
+**Estruturas Condicionais (if / elif / else):** Foram utilizadas para controlar a lógica do jogo e a tomada de decisões. Com elas, implementamos a navegação entre os diferentes estados (menu, opções, jogo e saída), o tratamento das ações do jogador, a resposta aos eventos da interface e outras mecânicas do jogo.
+
+**Funções:** Criamos funções para separar tarefas específicas, como o redimensionamento de imagens e o processamento de sprites. Essa organização evitou repetição de código, facilitou a reutilização de funcionalidades e tornou o projeto mais legível.
+
+**Laços de Repetição (while e for):** O funcionamento do jogo é controlado por um laço `while`, responsável por manter a execução contínua da aplicação enquanto ela estiver aberta. Também utilizamos laços `for` para percorrer eventos do Pygame, processar animações e manipular coleções de elementos do jogo de forma eficiente.
 
 ## Desafios, erros e aprendizados
