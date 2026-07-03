@@ -31,6 +31,7 @@ As configurações globais do jogo foram concentradas em um único arquivo, faci
 * Pyscroll: faz a renderização dos mapas e o sistema de câmera/scrolling.
 * pygame_gui: utilizado na criação da interface gráfica e dos menus.
 * Pytweening: empregado para animações e transições suaves na interface.
+* PyTMX: serve para ler mapas criados no editor Tiled (.tmx) e usá-los no jogo.
 
 ## Membros da equipe e suas funções
 
