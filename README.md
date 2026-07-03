@@ -20,6 +20,8 @@ A protagonista é uma ciborgue assassina de aluguel que possui uma espada equipa
 
 As configurações globais do jogo foram concentradas em um único arquivo, facilitando a manutenção e a alteração de parâmetros. Além disso, o projeto utiliza uma estrutura baseada em cenas, permitindo o gerenciamento organizado dos diferentes estados do jogo, como menus e fases.
 
+## Galeria do Projeto
+
 ## Ferramentas utilizadas
 
 * Python: linguagem utilizada no desenvolvimento do projeto.
