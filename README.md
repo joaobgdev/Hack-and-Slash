@@ -20,17 +20,7 @@ Para executar o jogo, é necessário ter o Python instalado no computador (vers�
 
 ### Instalação das dependências
 
-O jogo utiliza as seguintes bibliotecas:
-
-* pygame-ce
-* pygame-gui
-* pyscroll
-* pytmx
-* pymunk
-* pyganim
-* PyTweening
-
-Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
+O jogo utiliza algumas bibliotecas. Entretanto, não é necessário instalar cada biblioteca individualmente. Todas as dependências já estão listadas no arquivo requirements.txt.
 
 Após clonar ou baixar o projeto, abra um terminal na pasta do projeto e execute o seguinte comando:
 ```bash
@@ -110,3 +100,16 @@ Durante o desenvolvimento do jogo, aplicamos diversos conceitos estudados na dis
 **Laços de Repetição (while e for):** O funcionamento do jogo é controlado por um laço `while`, responsável por manter a execução contínua da aplicação enquanto ela estiver aberta. Também utilizamos laços `for` para percorrer eventos do Pygame, processar animações e manipular coleções de elementos do jogo de forma eficiente.
 
 ## Desafios, erros e aprendizados
+
+**Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?**
+
+O maior desafio foi conciliar o desenvolvimento do jogo com as provas, trabalhos e projetos de outras disciplinas, que aconteceram no mesmo período. Muitas vezes, tivemos pouco tempo para trabalhar no projeto. Para lidar com isso, dividimos as tarefas entre os integrantes, organizamos melhor o que precisava ser feito e aproveitamos o tempo disponível para desenvolver e testar o jogo. Assim, conseguimos concluir o projeto dentro do prazo.
+
+**Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?**
+
+O maior erro durante o projeto foi a dificuldade de organizar o código usando Programação Orientada a Objetos (POO). Como ainda estávamos aprendendo esse modelo de programação, tivemos dúvidas sobre como dividir as responsabilidades das classes e organizar melhor o código. Isso fez com que algumas partes precisassem ser refeitas. Para resolver esse problema, reorganizamos algumas classes, fizemos ajustes no código e buscamos entender melhor os conceitos de POO, deixando o projeto mais organizado e fácil de manter.
+
+
+**Quais as lições aprendidas durante o projeto?**
+
+A principal lição foi que organização e trabalho em equipe são fundamentais para o sucesso de um projeto. Também aprendemos que planejar melhor a estrutura do código, principalmente usando POO, evita problemas no futuro e facilita a implementação de novas funcionalidades. Além disso, o projeto nos ajudou a melhorar nossos conhecimentos em Python e Pygame e mostrou a importância da comunicação, da divisão de tarefas e do planejamento durante o desenvolvimento.
